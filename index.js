@@ -1,7 +1,7 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import {} from "dotenv/config";
 
 const port = process.env.PORT || 4000;
 const database = process.env.DATABASE_URL;
