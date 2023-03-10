@@ -11,7 +11,7 @@ const userCardSchema = new Schema({
     type: String,
     required: true,
   },
-  role: {
+  type: {
     type: String,
     required: true,
     validate: {
