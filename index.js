@@ -2,8 +2,8 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import {} from "dotenv/config";
+import validator from "validator";
 import dayjs from "dayjs";
-
 const port = process.env.PORT || 4000;
 const database = process.env.DATABASE_URL;
 const app = express();
@@ -21,8 +21,8 @@ app.use((error, req, res, next) => {
   const data = error.data;
   res.status(status).json({ message: message, data: data });
 });
-
 app.listen(port, () => {
+  1;
   console.log(`start server at port: ${port}`);
   mongoose
     .connect(database)

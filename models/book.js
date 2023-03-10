@@ -18,7 +18,7 @@ const bookSchema = new Schema({
     type: Date,
     require: true,
     validator: (value) => {
-      return value.getTime() <= new Date().getTime();
+      return validator.isBefore(value.toString());
     },
     message: "Release date is not valid",
   },
