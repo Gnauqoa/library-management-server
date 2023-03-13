@@ -44,6 +44,9 @@ const userCardSchema = new Schema(
     created_at: {
       type: Date,
     },
+    updated_at: {
+      type: Date,
+    },
     expire_at: {
       type: Date,
     },
@@ -107,6 +110,7 @@ userCardSchema.pre("save", async function (next) {
   if (UserCard.isModified("password"))
     UserCard.password = await bcrypt.hash(UserCard.password, 10);
   UserCard.created_at = new Date();
+  UserCard.updated_at = new Date();
   UserCard.expire_at = dayjs().add(6, "month").toDate();
   next();
 });
