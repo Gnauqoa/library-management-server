@@ -9,6 +9,7 @@ const formatBookRes = (book) => {
     created_at: book.created_at,
     updated_at: book.updated_at,
     release_date: book.release_date,
+    status: book.status,
     publisher: formatPublisherRes(book.publisher_id),
     author: formatAuthorRes(book.author_id),
   };

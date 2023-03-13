@@ -1,3 +1,4 @@
 import addBook from "./addBook.js";
 import getBooks from "./getBooks.js";
-export { addBook, getBooks };
+import getBook from "./getBookById.js";
+export { addBook, getBooks, getBook };

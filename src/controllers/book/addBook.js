@@ -17,6 +17,7 @@ const addBook = async (req, res) => {
         .toDate(),
       publisher_id,
       author_id,
+      status: true,
     });
     await book.save();
     res.status(201).json({

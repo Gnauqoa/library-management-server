@@ -39,6 +39,10 @@ const bookSchema = new Schema(
     updated_at: {
       type: Date,
     },
+    status: {
+      type: Boolean,
+      required: true,
+    },
   },
   { collection: "books" }
 );
