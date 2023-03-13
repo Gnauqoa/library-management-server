@@ -33,6 +33,12 @@ const bookSchema = new Schema(
       require: true,
       ref: "Author",
     },
+    created_at: {
+      type: Date,
+    },
+    updated_at: {
+      type: Date,
+    },
   },
   { collection: "books" }
 );
