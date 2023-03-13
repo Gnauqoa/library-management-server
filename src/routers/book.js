@@ -1,8 +1,9 @@
 import express from "express";
-import { addBook } from "../controllers/book/index.js";
+import { addBook, getBooks } from "../controllers/book/index.js";
 
 const bookRouter = express.Router();
 
 bookRouter.post("/", addBook);
+bookRouter.get("/", getBooks);
 
 export default bookRouter;

@@ -1,3 +1,3 @@
 import addBook from "./addBook.js";
-
-export { addBook };
+import getBooks from "./getBooks.js";
+export { addBook, getBooks };
