@@ -6,7 +6,9 @@ const addPublisher = async (req, res) => {
   try {
     const { name, date_establish, address } = req.body;
     const { date, month, year } = date_establish;
-
+    const existingPublisher = await Publisher.findOne({ name });
+    if (existingPublisher)
+      return res.status(400).json({ message: "Publisher already exists" });
     const publisher = new Publisher({
       name,
       address,
