@@ -42,4 +42,10 @@ const bookSchema = new Schema(
   },
   { collection: "books" }
 );
+bookSchema.pre("save", async function (next) {
+  const Book = this;
+  Book.created_at = new Date();
+  Book.updated_at = new Date();
+  next();
+});
 export default model("Book", bookSchema);

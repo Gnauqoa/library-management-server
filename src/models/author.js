@@ -24,7 +24,19 @@ const authorSchema = new Schema(
       type: Boolean,
       required: true,
     },
+    created_at: {
+      type: Date,
+    },
+    updated_at: {
+      type: Date,
+    },
   },
   { collection: "authors" }
 );
+authorSchema.pre("save", async function (next) {
+  const author = this;
+  author.created_at = new Date();
+  author.updated_at = new Date();
+  next();
+});
 export default model("Author", authorSchema);
