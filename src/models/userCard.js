@@ -22,7 +22,7 @@ const userCardSchema = new Schema(
       type: String,
       required: true,
       validate: {
-        validator: (value) => value === "A" || value === "B",
+        validator: (value) => value === "X" || value === "Y",
         message: "Card type is not valid",
       },
     },

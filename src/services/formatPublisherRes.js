@@ -4,7 +4,7 @@ const formatPublisherRes = (publisher) => {
     name: publisher.name,
     address: publisher.address,
     created_at: publisher.created_at,
-    updated_at: publisher.created_at,
+    updated_at: publisher.updated_at,
   };
 };
 
