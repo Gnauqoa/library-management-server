@@ -1,10 +1,12 @@
-import UserCardModel from "../../models/userCard";
-import formatUserCardRes from "../../services/formatUserCardRes";
+import dayjs from "dayjs";
+import UserCardModel from "../../models/userCard.js";
+import formatUserCardRes from "../../services/formatUserCardRes.js";
 
 const register = async (req, res) => {
   try {
     const { first_name, last_name, type, birth, address, email, password } =
       req.body;
+    const { date, month, year } = birth;
     const existingUser = await UserCardModel.findOne({ email });
     if (existingUser)
       return res.status(400).json({ message: "User already exists" });
@@ -13,7 +15,7 @@ const register = async (req, res) => {
       first_name,
       last_name,
       type,
-      birth,
+      birth: dayjs()["date"](date)["month"](month)["year"](year).toDate(),
       address,
       password: password || "12345678",
     });

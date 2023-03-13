@@ -43,11 +43,9 @@ const userCardSchema = new Schema(
     },
     created_at: {
       type: Date,
-      required: true,
     },
     expire_at: {
       type: Date,
-      required: true,
     },
     email: {
       type: String,

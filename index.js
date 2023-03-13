@@ -2,15 +2,17 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import {} from "dotenv/config";
+import router from "./src/routers/index.js";
 import dayjs from "dayjs";
 const port = process.env.PORT || 4000;
 const database = process.env.DATABASE_URL;
 const app = express();
+const version = "/v1";
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
+app.use(version, router);
 mongoose.set("strictQuery", false); // hide notify in console
 
 app.use((error, req, res, next) => {
@@ -21,7 +23,6 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message, data: data });
 });
 app.listen(port, () => {
-  1;
   console.log(`start server at port: ${port}`);
   mongoose
     .connect(database)
