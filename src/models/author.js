@@ -1,4 +1,4 @@
-import { Schema, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 import validator from "validator";
 
 const authorSchema = new Schema({
@@ -24,5 +24,5 @@ const authorSchema = new Schema({
     required: true,
   },
 });
-
-export default Model("Author", authorSchema);
+const AuthorModal = model("Author", authorSchema);
+export default AuthorModal;

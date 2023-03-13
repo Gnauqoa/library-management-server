@@ -1,4 +1,4 @@
-import { Schema, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 import { ObjectId } from "mongodb";
 
 const bookSchema = new Schema({
@@ -33,5 +33,5 @@ const bookSchema = new Schema({
     ref: "Author",
   },
 });
-
-export default Model("Book", bookSchema);
+const BookModal = model("Book", bookSchema);
+export default BookModal;
