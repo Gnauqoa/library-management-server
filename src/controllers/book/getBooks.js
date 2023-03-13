@@ -3,12 +3,8 @@ import formatBookRes from "../../services/formatBookRes.js";
 
 const getBooks = async (req, res) => {
   try {
-    const per_page =
-      !Boolean(req.query.per_page) || req.query.per_page < 1
-        ? 20
-        : req.query.per_page;
-    const page =
-      !Boolean(req.query.page) || req.query.page < 1 ? 1 : req.query.page;
+    const per_page = req.per_page;
+    const page = req.page;
     const query = req.query.query;
     const total_items = await Book.count();
     let bookList;
