@@ -1,6 +1,5 @@
-import { Schema, Model } from "mongoose";
-import validator
- from "validator";
+import { Schema, model } from "mongoose";
+import validator from "validator";
 const publisherSchema = new Schema({
   name: {
     type: String,
@@ -19,5 +18,5 @@ const publisherSchema = new Schema({
     message: "Establishment date is not valid",
   },
 });
-
-export default Model("Publisher", publisherSchema);
+const PublisherModal = model("Publisher", publisherSchema);
+export default PublisherModal;

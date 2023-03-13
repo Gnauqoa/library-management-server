@@ -1,4 +1,4 @@
-import { Schema, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 import validator from "validator";
 import dayjs from "dayjs";
 
@@ -48,5 +48,5 @@ const userCardSchema = new Schema({
     },
   },
 });
-
-export default Model("UserCard", userCardSchema);
+const UserCardModel = model("UserCard", userCardSchema);
+export default UserCardModel;
