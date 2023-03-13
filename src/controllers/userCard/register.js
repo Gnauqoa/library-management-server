@@ -20,7 +20,6 @@ const register = async (req, res) => {
       password: password || "12345678",
     });
     await userCard.save();
-    console.log(userCard);
     res.status(201).json({
       message: "Create user success",
       data: formatUserCardRes(userCard),
