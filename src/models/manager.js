@@ -61,12 +61,6 @@ const managerSchema = new Schema(
   },
   { collection: "managers" }
 );
-managerSchema.pre("save", async function (next) {
-  const Book = this;
-  Book.created_at = new Date();
-  Book.updated_at = new Date();
-  next();
-});
 managerSchema.methods.createAccessToken = async function () {
   const manager = this;
   const access_tokens = jwt.sign({ managerId: manager._id }, secretKey, {
