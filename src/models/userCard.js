@@ -1,6 +1,12 @@
 import { Schema, model } from "mongoose";
 import validator from "validator";
 import dayjs from "dayjs";
+import jwt from "jsonwebtoken";
+import {} from "dotenv/config";
+import bcrypt from "bcrypt";
+
+const secretKey = process.env.JWT_KEY;
+const expiresTime = process.env.expiresTime;
 
 const userCardSchema = new Schema(
   {
@@ -89,4 +95,21 @@ const userCardSchema = new Schema(
   },
   { collection: "user cards" }
 );
+userCardSchema.methods.createAccessToken = async function () {
+  const userCard = this;
+  const access_tokens = jwt.sign({ userCardId: userCard._id }, secretKey, {
+    expiresIn: expiresTime,
+  });
+  userCard.access_tokens = userCard.access_tokens.concat({ access_tokens });
+  await userCard.save();
+  return access_tokens;
+};
+userCardSchema.pre("save", async function (next) {
+  const UserCard = this;
+  if (UserCard.isModified("password"))
+    UserCard.password = await bcrypt.hash(UserCard.password, 10);
+  UserCard.created_at = new Date();
+  UserCard.expire_at = dayjs().add(6, "month").toDate();
+  next();
+});
 export default model("UserCard", userCardSchema);
