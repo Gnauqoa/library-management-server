@@ -39,6 +39,10 @@ const bookSchema = new Schema(
     updated_at: {
       type: Date,
     },
+    created_by: {
+      type: ObjectId,
+      ref: "Manager",
+    },
     status: {
       type: Boolean,
       required: true,
