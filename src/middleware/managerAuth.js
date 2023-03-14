@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import {} from "dotenv/config";
-import Manager from "../models/manager";
+import Manager from "../models/manager.js";
 const secretKey = process.env.JWT_KEY;
 
 const managerAuth = async (req, res, next) => {
@@ -10,10 +10,12 @@ const managerAuth = async (req, res, next) => {
     const manager = await Manager.findOne({
       _id: decodedToken.managerId,
     });
+
     if (!manager) return res.status(500).json({ error: "Unauthorized" });
     if (
-      manager.access_tokens.findIndex((ele) => ele.access_tokens === token) ===
-      -1
+      manager.access_tokens.findIndex((ele) => {
+        return ele.access_tokens === access_token;
+      }) === -1
     )
       return res.status(401).json({ error: "Unauthorized" });
     req.manager = manager;

@@ -10,11 +10,12 @@ const addPublisher = async (req, res) => {
     if (existingPublisher)
       return res.status(400).json({ message: "Publisher already exists" });
     const publisher = new Publisher({
+      created_by: req.manager._id,
       name,
       address,
       birth: dayjs()["date"](date)["month"](month)["year"](year).toDate(),
     });
-    await publisher.save();
+    await (await publisher.save()).populate("created_by");
     res.status(201).json({
       message: "Create publisher success",
       data: formatPublisherRes(publisher),

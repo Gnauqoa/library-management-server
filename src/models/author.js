@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { Schema, model } from "mongoose";
 import validator from "validator";
 
@@ -29,6 +30,11 @@ const authorSchema = new Schema(
     },
     updated_at: {
       type: Date,
+    },
+    created_by: {
+      type: ObjectId,
+      ref: "Manager",
+      required: true,
     },
   },
   { collection: "authors" }

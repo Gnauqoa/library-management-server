@@ -6,22 +6,31 @@ const getBooks = async (req, res) => {
     const per_page = req.per_page;
     const page = req.page;
     const query = req.query.query;
-    const total_items = await Book.count();
+
+    let total_items = 0;
     let bookList;
-    if (query !== undefined)
+    if (query !== undefined) {
       bookList = await Book.find({
         name: { $regex: query, $options: "i" },
       })
         .skip(per_page * (page - 1))
         .limit(per_page)
         .populate("publisher_id")
-        .populate("author_id");
-    else
+        .populate("author_id")
+        .populate("created_by");
+      total_items = await Book.count({
+        name: { $regex: query, $options: "i" },
+      });
+    } else {
       bookList = await Book.find()
         .skip(per_page * (page - 1))
         .limit(per_page)
         .populate("publisher_id")
-        .populate("author_id");
+        .populate("author_id")
+        .populate("created_by");
+      total_items = await Book.count();
+    }
+
     res.status(200).json({
       data: {
         items: bookList.map((data) => formatBookRes(data)),

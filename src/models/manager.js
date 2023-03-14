@@ -2,21 +2,24 @@ import { Schema, model } from "mongoose";
 import validator from "validator";
 import {} from "dotenv/config";
 import jwt from "jsonwebtoken";
-import dayjs from "dayjs";
 import bcrypt from "bcrypt";
 
 const secretKey = process.env.JWT_KEY;
 const expiresTime = process.env.expiresTime;
+
 const managerSchema = new Schema(
   {
-    email: {
+    first_name: {
       type: String,
-      unique: true,
-      lowercase: true,
-      validate: {
-        validator: (value) => validator.isEmail(value),
-        message: "Invalid Email address",
-      },
+      required: true,
+    },
+    last_name: {
+      type: String,
+      required: true,
+    },
+    account: {
+      type: String,
+      required: true,
     },
     password: {
       type: String,
@@ -67,6 +70,7 @@ managerSchema.methods.createAccessToken = async function () {
     expiresIn: expiresTime,
   });
   manager.access_tokens = manager.access_tokens.concat({ access_tokens });
+  console.log(manager);
   await manager.save();
   return access_tokens;
 };
